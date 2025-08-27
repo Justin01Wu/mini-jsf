@@ -1,0 +1,100 @@
+<web-app
+        xmlns = "https://jakarta.ee/xml/ns/jakartaee"
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation = "https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+        id="vcaps-app"
+        version = "6.0"
+        metadata-complete = "false"
+>
+    <display-name>Welcome to VCAPS</display-name>
+    <description>Welcome to VCAPS</description>
+
+    <context-param>
+        <param-name>jakarta.faces.CONFIG_FILES</param-name>
+
+        <param-value>
+
+            /WEB-INF/mbean.xml,
+        </param-value>
+
+    </context-param>
+
+    <context-param>
+        <param-name>jakarta.faces.FACELETS_BUFFER_SIZE</param-name>
+        <param-value>-1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jakarta.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.DELEGATE_FACES_SERVLET</param-name>
+        <param-value>org.apache.myfaces.webapp.MyFacesServlet</param-value>
+    </context-param>
+    <!-- not supported anymore
+    <context-param>
+        <param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    -->
+    <context-param>
+        <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <!-- not supported anymore
+    <context-param>
+        <param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    -->
+    <context-param>
+        <param-name>org.apache.myfaces.VALIDATE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+
+    <!-- Faces Servlet -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>VCAPS init Servlet</servlet-name>
+        <servlet-class>com.aig.gi.talbot.merged.model.domain.dashboard.web.VcapsInitServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+
+
+    <session-config>
+        <session-timeout>60</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>  <!-- protect cookie on the client side -->
+            <secure>false</secure>  <!--  don't change it until you modify related maven build -->
+        </cookie-config>
+
+    </session-config>
+    <!-- do not edit SECURE COOKIE CONFIG. it is placeholder for maven build replace -->
+
+    <welcome-file-list>
+        <!-- until issue on Chrome is resolved related to ignoring browser cache headers like Cache-Control and Pragma, index.jsp has to be used as default -->
+        <!--welcome-file>index.jsp</welcome-file-->
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+
+</web-app>
